@@ -1,0 +1,34 @@
+# Dependabot version updates. Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Go Modules
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Semantic versioning is MAJOR.MINOR.PATCH we ignore PATCH updates:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-patch" ]
+
+  # Docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Semantic versioning is MAJOR.MINOR.PATCH we ignore PATCH updates:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-patch" ]
+
+  # Github Actions
+  - package-ecosystem: "github-actions"
+    directory: ".github/workflows"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Semantic versioning is MAJOR.MINOR.PATCH we ignore PATCH updates:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-patch" ]

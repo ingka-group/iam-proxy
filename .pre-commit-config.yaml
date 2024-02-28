@@ -1,0 +1,36 @@
+---
+# Increase the amount of information that we get out of a pre-commit run
+# Do not prematurely fail the CI run when 1 item fails
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-json
+      - id: check-yaml
+      - id: end-of-file-fixer
+        exclude: ^(docs/swagger.*|newman|templates/copyright-header.tpl)
+      - id: trailing-whitespace
+
+  # Here we partition the hooks to improve on the sequence of checks (heaviest check last)
+  - repo: &golang-repo https://github.com/tekwizely/pre-commit-golang
+    rev: &golang-rev v1.0.0-rc.1
+    hooks:
+      - id: go-fmt
+        args: [ -w ]
+      - id: go-staticcheck-mod
+      - id: go-build-mod
+
+  - repo: local
+    hooks:
+      - id: go-import-lint
+        name: go-import-lint
+        entry: go-import-lint
+        language: system
+        require_serial: true
+
+  - repo: *golang-repo
+    rev: *golang-rev
+    hooks:
+      - id: go-test-mod

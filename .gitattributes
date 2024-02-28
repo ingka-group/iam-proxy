@@ -1,0 +1,3 @@
+go.sum linguist-generated
+*.go -text diff=golang
+*.csv filter=lfs diff=lfs merge=lfs -text

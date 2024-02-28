@@ -1,0 +1,101 @@
+{
+  "info": {
+    "_postman_id": "100e62f5-8622-421b-b741-d3b92a51d232",
+    "name": "IAM",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/iam/v1/health",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "iam",
+            "v1",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ready",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/iam/v1/ready",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "iam",
+            "v1",
+            "ready"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "client_id=<client_id>&client_secret=<client_secret>&grant_type=client_credentials"
+        },
+        "url": {
+          "raw": "localhost:8080/iam/v1/oauth2/token",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "iam",
+            "v1",
+            "oauth2",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "validate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Authorization eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzIwNDg2NjIsImlzcyI6Imdpcy1pYW0iLCJzdWIiOiJcdTAwM2NvY3BcdTAwM2UifQ.Rs8Ss1zfzu_ff976TtZl5jRAi68-sMw3TFFqks-NtgUP6ZrbXMMQ46ffdDbeaNb0rWG5rwFRTDcnJvwYWjh3Dg",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8080/iam/v1/oauth2/validate",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "iam",
+            "v1",
+            "oauth2",
+            "validate"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
