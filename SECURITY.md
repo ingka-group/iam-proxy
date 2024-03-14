@@ -9,4 +9,4 @@
 ## Reporting a Vulnerability
 
 The repository is actively monitored for security issues through GitHub's security features.
-However, in case you identify a potential vulnerability, please open an issue on GitHub.
+However, in case you identify a potential vulnerability, please use the[security advisory form](https://github.com/ingka-group/iam-proxy/security/advisories/new).
