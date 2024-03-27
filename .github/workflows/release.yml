@@ -33,34 +33,6 @@ jobs:
           MINOR_STRING_TOKEN: feat
           DEFAULT_BUMP: patch
 
-      - name: Setup go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.21
-
-      - name: Install JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v4
-
-      - name: Build binary and push to JFrog
-        run: |
-          BUILD_NAME=${{ github.repository }}
-
-          # make compile will use this VERSION in the go-install command
-          export VERSION=${{ steps.bump_version.outputs.new_tag }}
-
-          # Configure Artifactory:
-          jf c add --url=${{ secrets.JF_URL }} --access-token=${{ secrets.JF_ACCESS_TOKEN }}
-
-          # Configure the project's repositories:
-          jf go-config --repo-resolve=${{ secrets.JF_GO_RELEASE_REPO }} --repo-deploy=${{ secrets.JF_GO_RELEASE_REPO }}
-
-          # Build the project with go and resolve the project dependencies from Artifactory.
-          # The `go build` command is copied from `make compile`
-          jf go build -ldflags "-X $(go list -m)/internal/version.Version=${VERSION}" ./... --build-name=$BUILD_NAME --build-number=$VERSION
-
-          # Publish the package to the <GO_DEPLOY_REPO> repository in Artifactory.
-          jf go-publish --build-name=$BUILD_NAME --build-number=$VERSION $VERSION
-
       - name: Build changelog
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v4.2.0
