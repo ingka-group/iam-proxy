@@ -17,7 +17,7 @@ package main
 import (
 	"log"
 
-	app "github.com/ingka-group-digital/iam-proxy/internal"
+	app "github.com/ingka-group/iam-proxy/internal"
 )
 
 func main() {

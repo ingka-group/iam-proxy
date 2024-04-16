@@ -20,10 +20,10 @@ import (
 
 	"github.com/golang/mock/gomock"
 
-	clienthttp "github.com/ingka-group-digital/iam-proxy/client/http"
-	"github.com/ingka-group-digital/iam-proxy/client/paths"
-	"github.com/ingka-group-digital/iam-proxy/internal/service/mock_service"
-	"github.com/ingka-group-digital/iam-proxy/internal/testutil"
+	clienthttp "github.com/ingka-group/iam-proxy/client/http"
+	"github.com/ingka-group/iam-proxy/client/paths"
+	"github.com/ingka-group/iam-proxy/internal/service/mock_service"
+	"github.com/ingka-group/iam-proxy/internal/testutil"
 )
 
 func TestClient_Generate(t *testing.T) {

@@ -24,9 +24,9 @@ import (
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
-	"github.com/ingka-group-digital/iam-proxy/client/iamerrors"
-	"github.com/ingka-group-digital/iam-proxy/client/paths"
+	"github.com/ingka-group/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/client/iamerrors"
+	"github.com/ingka-group/iam-proxy/client/paths"
 )
 
 const (

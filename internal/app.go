@@ -24,10 +24,10 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/ingka-group-digital/iam-proxy/internal/api"
-	"github.com/ingka-group-digital/iam-proxy/internal/config"
-	"github.com/ingka-group-digital/iam-proxy/internal/errors"
-	"github.com/ingka-group-digital/iam-proxy/internal/service"
+	"github.com/ingka-group/iam-proxy/internal/api"
+	"github.com/ingka-group/iam-proxy/internal/config"
+	"github.com/ingka-group/iam-proxy/internal/errors"
+	"github.com/ingka-group/iam-proxy/internal/service"
 )
 
 // Run starts the application

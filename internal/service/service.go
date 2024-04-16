@@ -21,8 +21,8 @@ package service
 import (
 	"context"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
-	"github.com/ingka-group-digital/iam-proxy/internal/models"
+	"github.com/ingka-group/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/internal/models"
 )
 
 // Servicer interface of service

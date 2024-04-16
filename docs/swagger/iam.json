@@ -137,7 +137,7 @@
         }
       },
       "x-go-name": "Health",
-      "x-go-package": "github.com/ingka-group-digital/iam-proxy/client/health"
+      "x-go-package": "github.com/ingka-group/iam-proxy/client/health"
     },
     "token": {
       "description": "Token for IAM verification",
@@ -167,7 +167,7 @@
         }
       },
       "x-go-name": "Token",
-      "x-go-package": "github.com/ingka-group-digital/iam-proxy/client/iam"
+      "x-go-package": "github.com/ingka-group/iam-proxy/client/iam"
     },
     "tokenIdentity": {
       "description": "TokenIdentity for getting the IAM token identity",
@@ -179,7 +179,7 @@
         }
       },
       "x-go-name": "TokenIdentity",
-      "x-go-package": "github.com/ingka-group-digital/iam-proxy/client/iam"
+      "x-go-package": "github.com/ingka-group/iam-proxy/client/iam"
     }
   }
 }

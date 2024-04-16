@@ -21,9 +21,9 @@ import (
 	"io"
 	"net/http"
 
-	jwt "github.com/ingka-group-digital/iam-proxy/client/http"
-	"github.com/ingka-group-digital/iam-proxy/client/iamerrors"
-	"github.com/ingka-group-digital/iam-proxy/client/paths"
+	jwt "github.com/ingka-group/iam-proxy/client/http"
+	"github.com/ingka-group/iam-proxy/client/iamerrors"
+	"github.com/ingka-group/iam-proxy/client/paths"
 )
 
 // Token calls the iam service and returns the access token based on the provided clientID and clientSecret.

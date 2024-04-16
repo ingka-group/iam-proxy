@@ -1,4 +1,4 @@
-module github.com/ingka-group-digital/iam-proxy
+module github.com/ingka-group/iam-proxy
 
 go 1.21
 

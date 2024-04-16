@@ -39,9 +39,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	jwt "github.com/ingka-group-digital/iam-proxy/client/http"
-	"github.com/ingka-group-digital/iam-proxy/client/iam"
-	"github.com/ingka-group-digital/iam-proxy/internal/logger"
+	jwt "github.com/ingka-group/iam-proxy/client/http"
+	"github.com/ingka-group/iam-proxy/client/iam"
+	"github.com/ingka-group/iam-proxy/internal/logger"
 )
 
 // swagger:route POST /oauth2/token token

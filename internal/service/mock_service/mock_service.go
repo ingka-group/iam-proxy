@@ -23,7 +23,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	health "github.com/ingka-group-digital/iam-proxy/client/health"
+	health "github.com/ingka-group/iam-proxy/client/health"
 )
 
 // MockServicer is a mock of Servicer interface.

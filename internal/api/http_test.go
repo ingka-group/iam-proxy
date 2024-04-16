@@ -27,12 +27,12 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"go.uber.org/zap"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
-	"github.com/ingka-group-digital/iam-proxy/client/paths"
-	"github.com/ingka-group-digital/iam-proxy/internal/config"
-	"github.com/ingka-group-digital/iam-proxy/internal/logger"
-	"github.com/ingka-group-digital/iam-proxy/internal/service/mock_service"
-	"github.com/ingka-group-digital/iam-proxy/internal/testutil"
+	"github.com/ingka-group/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/client/paths"
+	"github.com/ingka-group/iam-proxy/internal/config"
+	"github.com/ingka-group/iam-proxy/internal/logger"
+	"github.com/ingka-group/iam-proxy/internal/service/mock_service"
+	"github.com/ingka-group/iam-proxy/internal/testutil"
 )
 
 func TestMain(m *testing.M) {

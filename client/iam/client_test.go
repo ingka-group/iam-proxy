@@ -26,8 +26,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
-	"github.com/ingka-group-digital/iam-proxy/client/paths"
+	"github.com/ingka-group/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/client/paths"
 )
 
 func TestClient_Health(t *testing.T) {
