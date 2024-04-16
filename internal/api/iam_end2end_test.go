@@ -24,13 +24,13 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	clienthttp "github.com/ingka-group-digital/iam-proxy/client/http"
-	"github.com/ingka-group-digital/iam-proxy/client/iam"
-	"github.com/ingka-group-digital/iam-proxy/client/jwt"
-	"github.com/ingka-group-digital/iam-proxy/client/paths"
-	"github.com/ingka-group-digital/iam-proxy/internal/config"
-	"github.com/ingka-group-digital/iam-proxy/internal/service"
-	"github.com/ingka-group-digital/iam-proxy/internal/testutil"
+	clienthttp "github.com/ingka-group/iam-proxy/client/http"
+	"github.com/ingka-group/iam-proxy/client/iam"
+	"github.com/ingka-group/iam-proxy/client/jwt"
+	"github.com/ingka-group/iam-proxy/client/paths"
+	"github.com/ingka-group/iam-proxy/internal/config"
+	"github.com/ingka-group/iam-proxy/internal/service"
+	"github.com/ingka-group/iam-proxy/internal/testutil"
 )
 
 func TestClient_GenerateToken(t *testing.T) {

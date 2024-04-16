@@ -23,8 +23,8 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/stretchr/testify/assert"
 
-	jwtmodule "github.com/ingka-group-digital/iam-proxy/client/jwt"
-	"github.com/ingka-group-digital/iam-proxy/internal/models"
+	jwtmodule "github.com/ingka-group/iam-proxy/client/jwt"
+	"github.com/ingka-group/iam-proxy/internal/models"
 )
 
 const (

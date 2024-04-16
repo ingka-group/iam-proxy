@@ -34,8 +34,8 @@ import (
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
-	"github.com/ingka-group-digital/iam-proxy/internal/logger"
-	"github.com/ingka-group-digital/iam-proxy/internal/version"
+	"github.com/ingka-group/iam-proxy/internal/logger"
+	"github.com/ingka-group/iam-proxy/internal/version"
 )
 
 const (

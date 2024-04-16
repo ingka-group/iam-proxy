@@ -17,7 +17,7 @@ package testutil
 import (
 	"go.uber.org/zap"
 
-	"github.com/ingka-group-digital/iam-proxy/internal/config"
+	"github.com/ingka-group/iam-proxy/internal/config"
 )
 
 // SampleConfig returns a config instance for unit tests

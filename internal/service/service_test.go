@@ -21,11 +21,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
-	"github.com/ingka-group-digital/iam-proxy/client/jwt"
-	"github.com/ingka-group-digital/iam-proxy/internal/config"
-	"github.com/ingka-group-digital/iam-proxy/internal/models"
-	"github.com/ingka-group-digital/iam-proxy/internal/testutil"
+	"github.com/ingka-group/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/client/jwt"
+	"github.com/ingka-group/iam-proxy/internal/config"
+	"github.com/ingka-group/iam-proxy/internal/models"
+	"github.com/ingka-group/iam-proxy/internal/testutil"
 )
 
 func TestIAMConfigurationInit(t *testing.T) {

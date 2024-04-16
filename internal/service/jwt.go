@@ -22,7 +22,7 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
 
-	"github.com/ingka-group-digital/iam-proxy/internal/models"
+	"github.com/ingka-group/iam-proxy/internal/models"
 )
 
 const (

@@ -23,7 +23,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/client/health"
 	"go.opencensus.io/plugin/ochttp"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"

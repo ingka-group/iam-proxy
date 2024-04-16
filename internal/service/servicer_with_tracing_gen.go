@@ -21,7 +21,7 @@ package service
 import (
 	"context"
 
-	"github.com/ingka-group-digital/iam-proxy/client/health"
+	"github.com/ingka-group/iam-proxy/client/health"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/codes"
 )

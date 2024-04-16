@@ -18,9 +18,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ingka-group-digital/iam-proxy/client/jwt"
-	"github.com/ingka-group-digital/iam-proxy/internal/config"
-	"github.com/ingka-group-digital/iam-proxy/internal/models"
+	"github.com/ingka-group/iam-proxy/client/jwt"
+	"github.com/ingka-group/iam-proxy/internal/config"
+	"github.com/ingka-group/iam-proxy/internal/models"
 )
 
 // Config for iam-proxy-v1 Service
