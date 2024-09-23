@@ -22,7 +22,7 @@ jobs:
           prefix: v
 
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.69.0
+        uses: anothrNick/github-tag-action@1.71.0
         id: bump_version
         env:
           GITHUB_TOKEN: ${{ github.token }}
