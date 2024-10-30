@@ -3,6 +3,11 @@ name: 🔬 PR Analysis
 on:
   pull_request:
 
+permissions:
+  pull-requests: read
+  contents: read
+  id-token: write
+
 jobs:
   pr-analysis:
     runs-on: ubuntu-latest
@@ -39,3 +44,25 @@ jobs:
         shell: bash
         run: |
           docker build . -t ${{ github.repository }}:${{ github.sha }}
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.71.0
+        id: bump_version
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          WITH_V: true
+          RELEASE_BRANCHES: main
+          # custom tagging policy adapted to conventional commits
+          MAJOR_STRING_TOKEN: feat!
+          MINOR_STRING_TOKEN: feat
+          DEFAULT_BUMP: patch
+          DRY_RUN: true # Do not push the tag during PR
+
+      - name: JFrog scanning
+        uses: ingka-group/echoprobe/.github/composites/jfrog@main
+        with:
+          jf_url: ${{ secrets.JF_URL }}
+          jf_oidc_provider: ${{ secrets.JF_OIDC_PROVIDER }}
+          jf_oidc_audience: ${{ secrets.JF_OIDC_AUDIENCE }}
+          jf_repo: ${{ secrets.JF_GO_DEV_REPO }}
+          version: ${{ steps.bump_version.outputs.new_tag }}

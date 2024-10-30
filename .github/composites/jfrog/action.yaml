@@ -1,0 +1,61 @@
+name: JFrog
+description: JFrog scanning and publishing
+
+inputs:
+  jf_url:
+    description: The URL of the JFrog Platform instance.
+    required: true
+
+  jf_oidc_provider:
+    description: The name of the OIDC provider.
+    required: true
+
+  jf_oidc_audience:
+    description: The audience of the OIDC provider.
+    required: true
+
+  jf_repo:
+    description: The name of the repository to use for resolving and deploying the Go package.
+    required: true
+
+  version:
+    description: The version of the Go package to build and publish.
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Artifactory CLI
+      uses: jfrog/setup-jfrog-cli@v4
+      id: jf-oidc
+      env:
+        JF_URL: ${{ inputs.jf_url }}
+      with:
+        oidc-provider-name: ${{ inputs.jf_oidc_provider }}
+        oidc-audience: ${{ inputs.jf_oidc_audience }}
+
+    - name: Set up Artifactory Server
+      shell: bash
+      run: |
+        jf c add "Artifactory" --url=${{ inputs.jf_url }} --access-token=${{ steps.jf-oidc.outputs.oidc-token }} --interactive=false
+
+    - name: Build and Publish Go Package
+      shell: bash
+      run: |
+        BUILD_NAME=${{ github.repository }}
+        VERSION=${{ inputs.version }}
+
+        # Configure the project's repositories:
+        jf go-config --repo-resolve=${{ inputs.jf_repo }} --repo-deploy=${{ inputs.jf_repo }}
+
+        # Build the project with go and resolve the project dependencies from Artifactory.
+        jf go build ./... --build-name=$BUILD_NAME --build-number=$VERSION
+
+        # Publish the package to the <GO_DEPLOY_REPO> repository in Artifactory.
+        jf go-publish --build-name=$BUILD_NAME --build-number=$VERSION $VERSION
+
+    - name: Discard Old Builds in Artifactory
+      if: success() && ${{ inputs.version }} != ''
+      shell: bash
+      run: |
+        jf rt bdi c --max-builds=5
