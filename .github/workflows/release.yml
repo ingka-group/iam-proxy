@@ -1,9 +1,15 @@
 name: 🔖 Release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+
+permissions:
+  pull-requests: read
+  contents: write
+  id-token: write
 
 jobs:
   release:
@@ -32,6 +38,15 @@ jobs:
           MAJOR_STRING_TOKEN: feat!
           MINOR_STRING_TOKEN: feat
           DEFAULT_BUMP: patch
+
+      - name: JFrog scanning
+        uses: ingka-group/iam-proxy/.github/composites/jfrog@main
+        with:
+          jf_url: ${{ secrets.JF_URL }}
+          jf_oidc_provider: ${{ secrets.JF_OIDC_PROVIDER }}
+          jf_oidc_audience: ${{ secrets.JF_OIDC_AUDIENCE }}
+          jf_repo: ${{ secrets.JF_GO_RELEASE_REPO }}
+          version: ${{ steps.bump_version.outputs.new_tag }}
 
       - name: Build changelog
         id: build_changelog
