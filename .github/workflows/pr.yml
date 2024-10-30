@@ -59,7 +59,7 @@ jobs:
           DRY_RUN: true # Do not push the tag during PR
 
       - name: JFrog scanning
-        uses: ingka-group/echoprobe/.github/composites/jfrog@main
+        uses: ingka-group/iam-proxy/.github/composites/jfrog@main
         with:
           jf_url: ${{ secrets.JF_URL }}
           jf_oidc_provider: ${{ secrets.JF_OIDC_PROVIDER }}
