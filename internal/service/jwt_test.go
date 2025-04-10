@@ -20,7 +20,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/stretchr/testify/assert"
 
 	jwtmodule "github.com/ingka-group/iam-proxy/client/jwt"
@@ -88,8 +88,8 @@ func TestService_ParseToken_ParseError(t *testing.T) {
 func TestService_ParseToken_Expired(t *testing.T) {
 	srv := newTestService()
 
-	claims := &jwt.StandardClaims{
-		ExpiresAt: time.Now().Add(-1 * time.Second).Unix(),
+	claims := &jwt.RegisteredClaims{
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(-1 * time.Second)),
 		Issuer:    issuer,
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -98,15 +98,15 @@ func TestService_ParseToken_Expired(t *testing.T) {
 
 	_, err = srv.ParseToken(tokenString)
 	assert.Error(t, err)
-	assert.True(t, strings.Contains(err.Error(), "token is expired by 1s"))
+	assert.True(t, strings.Contains(err.Error(), "token is expired"))
 	assert.True(t, strings.Contains(err.Error(), parseTokenError))
 }
 
 func TestService_ParseToken_IssuerError(t *testing.T) {
 	srv := newTestService()
 
-	claims := &jwt.StandardClaims{
-		ExpiresAt: time.Now().Unix(),
+	claims := &jwt.RegisteredClaims{
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(1 * time.Hour)),
 		Issuer:    "other-issuer",
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
