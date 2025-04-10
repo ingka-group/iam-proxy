@@ -1,8 +1,6 @@
 module github.com/ingka-group/iam-proxy
 
-go 1.23.0
-
-toolchain go1.24.1
+go 1.24.1
 
 require (
 	contrib.go.opencensus.io/exporter/ocagent v0.7.0
