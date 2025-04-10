@@ -94,7 +94,7 @@ func TestClient_GenerateToken(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			srv, err := service.New(defaultConfig(tt.iam))
 			if err != nil {
-				t.Errorf(fmt.Sprintf("could not create service instance: %s", err.Error()))
+				t.Errorf("could not create service instance: %s", err.Error())
 			}
 
 			tt.args.cfg.Service = srv
@@ -193,7 +193,7 @@ func TestClient_ParseToken(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			srv, err := service.New(defaultConfig(tt.iam))
 			if err != nil {
-				t.Errorf(fmt.Sprintf("could not create service instance: %s", err.Error()))
+				t.Errorf("could not create service instance: %s", err.Error())
 			}
 
 			tt.args.cfg.Service = srv
@@ -306,7 +306,7 @@ func TestClient_IdentityToken(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			srv, err := service.New(defaultConfig(tt.iam))
 			if err != nil {
-				t.Errorf(fmt.Sprintf("could not create service instance: %s", err.Error()))
+				t.Errorf("could not create service instance: %s", err.Error())
 			}
 
 			tt.args.cfg.Service = srv
@@ -355,7 +355,7 @@ func TestClient_End2End(t *testing.T) {
 
 	srv, err := service.New(defaultConfig(cfg))
 	if err != nil {
-		t.Errorf(fmt.Sprintf("could not create service instance: %s", err.Error()))
+		t.Errorf("could not create service instance: %s", err.Error())
 	}
 
 	c, err := New(Config{
