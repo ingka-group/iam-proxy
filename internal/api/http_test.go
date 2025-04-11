@@ -118,7 +118,7 @@ func TestHealth(t *testing.T) {
 			}
 
 			if diff := cmp.Diff(h, tt.want); diff != "" {
-				t.Errorf(diff)
+				t.Error(diff)
 			}
 		})
 	}

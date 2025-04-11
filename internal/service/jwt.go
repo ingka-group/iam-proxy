@@ -16,10 +16,11 @@ package service
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 
 	"github.com/ingka-group/iam-proxy/internal/models"
@@ -35,7 +36,7 @@ const (
 
 // Claims defines the token claims.
 type Claims struct {
-	jwt.StandardClaims
+	jwt.RegisteredClaims
 }
 
 // verifyUser checks the iam privileges for the given client id and secret.
@@ -65,18 +66,18 @@ func (s *Service) GenerateToken(_ context.Context, clientID, clientSecret string
 		return "", "", 0, fmt.Errorf("user not authorized to use iam service: %w", err)
 	}
 
-	expiration := time.Now().Add(expirationInterval).Unix()
+	expiration := time.Now().Add(expirationInterval)
 
-	accessToken, err := s.createToken(&jwt.StandardClaims{
-		Id:        uuid.New().String(),
-		ExpiresAt: expiration,
+	accessToken, err := s.createToken(&jwt.RegisteredClaims{
+		ID:        uuid.New().String(),
+		ExpiresAt: jwt.NewNumericDate(expiration),
 		Issuer:    issuer,
 	})
 	if err != nil {
 		return "", "", 0, fmt.Errorf("could not generate access token for %s: %w", appName, err)
 	}
 
-	identityToken, err := s.createToken(&jwt.StandardClaims{
+	identityToken, err := s.createToken(&jwt.RegisteredClaims{
 		Issuer:  issuer,
 		Subject: appName,
 	})
@@ -87,7 +88,7 @@ func (s *Service) GenerateToken(_ context.Context, clientID, clientSecret string
 	return accessToken, identityToken, int64(expirationInterval.Seconds()), nil
 }
 
-func (s *Service) createToken(claims *jwt.StandardClaims) (string, error) {
+func (s *Service) createToken(claims *jwt.RegisteredClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
 	tokenString, err := token.SignedString(s.secret)
 	if err != nil {
@@ -98,7 +99,7 @@ func (s *Service) createToken(claims *jwt.StandardClaims) (string, error) {
 
 // ParseToken parses the token and confirms its validity.
 func (s *Service) ParseToken(tokenString string) (string, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
@@ -109,12 +110,12 @@ func (s *Service) ParseToken(tokenString string) (string, error) {
 		return "", fmt.Errorf("%s: %w", parseTokenError, err)
 	}
 
-	if claims, ok := token.Claims.(*jwt.StandardClaims); ok && token.Valid {
+	if claims, ok := token.Claims.(*jwt.RegisteredClaims); ok && token.Valid {
 		if claims.Issuer != issuer {
-			return "", fmt.Errorf(invalidIssuer)
+			return "", errors.New(invalidIssuer)
 		}
 		return claims.Subject, nil
 	}
 
-	return "", fmt.Errorf(invalidTokenError)
+	return "", errors.New(invalidTokenError)
 }

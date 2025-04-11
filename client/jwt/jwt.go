@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 // Base64Encode encodes a byte array to a base 64 string.
@@ -44,7 +44,7 @@ func CryptoHash(base string) string {
 
 // DecodeToken decodes the non-secret part of the jwt token and extracts the associated claims.
 // Note: this method does not verify the tokens validity, for this the corresponding endpoint of the iam service should be used.
-func DecodeToken(token string) (*jwt.StandardClaims, error) {
+func DecodeToken(token string) (*jwt.RegisteredClaims, error) {
 	s := strings.Split(token, ".")
 	if len(s) < 2 {
 		return nil, fmt.Errorf("token format is wrong")
@@ -53,7 +53,7 @@ func DecodeToken(token string) (*jwt.StandardClaims, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not decode token part")
 	}
-	m := new(jwt.StandardClaims)
+	m := new(jwt.RegisteredClaims)
 	err = json.Unmarshal(b, &m)
 	if err != nil {
 		return nil, fmt.Errorf("could not unmarshal claims")
