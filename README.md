@@ -1,5 +1,10 @@
 # IAM Proxy service
 
+🔖 To **release** a new version of the codebase, trigger the `🔖 Release` workflow from GitHub actions.
+
+___
+
+
 ## Description
 
 This service defines a simple IAM verification procedure for OAuth2 authentication cycles. It will generate a token for
@@ -75,7 +80,6 @@ or, equivalently,
 ```bash
 $ make
 ```
-
 
 ## Contributing
 Please read [CONTRIBUTING](./CONTRIBUTING.md) for more details about making a contribution to this open source project and ensure that you follow our [CODE_OF_CONDUCT](./CODE_OF_CONDUCT.md).
