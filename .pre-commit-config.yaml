@@ -15,7 +15,7 @@ repos:
 
   # Here we partition the hooks to improve on the sequence of checks (heaviest check last)
   - repo: &golang-repo https://github.com/tekwizely/pre-commit-golang
-    rev: &golang-rev v1.0.0-rc.1
+    rev: &golang-rev v1.0.0-rc.4
     hooks:
       - id: go-fmt
         args: [ -w ]
