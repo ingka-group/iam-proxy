@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Get latest tag
-        uses: WyriHaximus/github-action-get-previous-tag@v1.4.0
+        uses: WyriHaximus/github-action-get-previous-tag@v2.0.0
         id: previous_version
         with:
           prefix: v
