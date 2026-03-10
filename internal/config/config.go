@@ -33,6 +33,8 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.22.0"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/credentials/insecure"
 
 	"github.com/ingka-group/iam-proxy/internal/logger"
 	"github.com/ingka-group/iam-proxy/internal/version"
@@ -153,16 +155,25 @@ func (c *Config) initTracer(ctx context.Context) {
 		return
 	}
 	c.Logger.With("config", c.Metric).Info("Enabled opentelemetry tracer & opencensus metrics")
+	grpcConn, err := grpc.NewClient(
+		c.Metric.OtelAgentAddr,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+	if err != nil {
+		c.Logger.Fatalw("Cannot create OpenTelemetry gRPC client", zap.Error(err))
+	}
+
+	if err := waitForGRPCReady(ctx, grpcConn); err != nil {
+		c.Logger.Fatalw("Cannot connect to OpenTelemetry Exporter", zap.Error(err))
+	}
+
 	driver := otlptracegrpc.NewClient(
-		otlptracegrpc.WithInsecure(),
-		otlptracegrpc.WithEndpoint(c.Metric.OtelAgentAddr),
-		otlptracegrpc.WithDialOption(grpc.WithBlock()), // useful for testing
+		otlptracegrpc.WithGRPCConn(grpcConn),
 	)
 
 	exp, err := otlptrace.New(ctx, driver)
-
 	if err != nil {
-		c.Logger.Fatalw("Cannot connect to OpenTelemetry Exporter", err)
+		c.Logger.Fatalw("Cannot create OpenTelemetry Exporter", zap.Error(err))
 	}
 
 	res, err := resource.New(ctx,
@@ -213,4 +224,19 @@ func (c *Config) initTracer(ctx context.Context) {
 	view.RegisterExporter(oc)
 	view.SetReportingPeriod(c.Metric.ReportingInterval)
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+}
+
+func waitForGRPCReady(ctx context.Context, conn *grpc.ClientConn) error {
+	conn.Connect()
+
+	for {
+		state := conn.GetState()
+		if state == connectivity.Ready {
+			return nil
+		}
+
+		if !conn.WaitForStateChange(ctx, state) {
+			return ctx.Err()
+		}
+	}
 }
