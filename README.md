@@ -1,5 +1,7 @@
 # IAM Proxy service
 
+# This repository will be archived on May 1st 2026
+
 🔖 To **release** a new version of the codebase, trigger the `🔖 Release` workflow from GitHub actions.
 
 ___
